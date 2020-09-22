@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button } from "react-bootstrap";
 import { FacebookLoginButton, GithubLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
-
+import {Link} from 'react-router-dom';
 
 class Login extends React.Component {
     constructor(props) {
@@ -45,13 +45,19 @@ class Login extends React.Component {
                     <a href="http://www.google.com">sign up</a>
                 </Form.Group>
                 <Form.Group>
-                    <GoogleLoginButton onClick={() => { console.log('Google button clicked') }} />
+                    <Link to="/main">
+                        <GoogleLoginButton onClick={() => { console.log("login from goole") }} />
+                    </Link>
                 </Form.Group>
                 <Form.Group className="facebook-button">
+                <Link to="/main">
                     <FacebookLoginButton onClick={() => console.log("Facebook login")} />
+                    </Link>
                 </Form.Group>
                 <Form.Group>
-                    <GithubLoginButton onClick={() => alert("Hello")} />
+                <Link to="/main">
+                    <GithubLoginButton onClick={() => console.log("Github login")} />
+                    </Link>
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Submit

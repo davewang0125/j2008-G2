@@ -13,6 +13,7 @@
     "react-facebook-login": "^4.1.1",
     "react-google-button": "^0.7.1",
     "react-icons": "^3.11.0",
+    "react-router-dom": "^5.2.0",
     "react-router-link": "^2.0.2",
     "react-scripts": "3.4.3",
     "react-social-login-buttons": "^3.1.0"

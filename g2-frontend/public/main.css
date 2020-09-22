@@ -1,0 +1,39 @@
+.sign-out-info {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.main-username {
+    padding: 15px;
+}
+
+.sign-out-bt {
+    padding: 10px;
+}
+
+.main-audio-list {
+    width: 70%;
+    margin: auto;
+    margin-top: 6%;
+    border: 1px solid rgb(165, 161, 161);
+    height: 500px;
+}
+
+.bt-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bt-container button {
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.translation-container {
+    padding: 10px;
+}
+
+.translation-time {
+    color: gray;
+    font-size: x-small;
+}
