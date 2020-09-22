@@ -1,0 +1,17 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=91140d38cc0a5f818eb1c5307df7b76c5bf4bbe108b750d44d3b89963bac335a
+
+language: python
+python: 3.7
+before_script:
+  - pip install coverage==4.4 pytest-cov codeclimate-test-reporter
+  - pip install --no-cache-dir -r requirements.txt 
+  - python -c "import nltk; nltk.download('punkt')"
+  - export LC_ALL="en_US.UTF-8"
+  - export LC_CTYPE="en_US.UTF-8"
+  - sudo apt-get update
+  - sudo apt-get install -y awscli && aws configure set s3.signature_version s3v4
+  - sudo dpkg-reconfigure locales
+script: pytest --cov=words_processor --cov=truecaser --cov=punctuator && docker build . --build-arg AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID --build-arg AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+after_script: codeclimate-test-reporter
