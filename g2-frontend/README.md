@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Environment
+
+To run this project, you should have npm installed on your laptop. To see more details, go to [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
 ## Available Scripts
 
