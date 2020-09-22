@@ -2,7 +2,7 @@
 
 To run this project, you should have npm installed on your laptop. To see more details, go to [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
-When you finish setting up the environment, run npm install to download all the dependencies, then run npm start.
+When you finish setting up the environment, run `npm install` to download all the dependencies, then run `npm start`.
 
 ## Available Scripts
 
