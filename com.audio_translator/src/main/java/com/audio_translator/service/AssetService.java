@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.audio_translator.dao.AssetRepository;
 import com.audio_translator.entity.Asset;
-import com.audio_translator.entity.User;
 
 @Service
 public class AssetService {
@@ -15,8 +14,8 @@ public class AssetService {
 	@Autowired
 	private AssetRepository repository;
 	
-	public User saveUser(Asset asset) {
-		return repository.save(user);
+	public Asset saveUser(Asset asset) {
+		return repository.save(asset);
 	}
 	
 	public List<Asset> saveUsers(List<Asset> users) {
