@@ -20,7 +20,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue
-	private  int userId;
+	private int userId;
 	
 	private String firstName;
 	private String lastName;
