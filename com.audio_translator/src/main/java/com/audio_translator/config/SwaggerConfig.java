@@ -20,17 +20,17 @@ public class SwaggerConfig {
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.antra.evaluation.reporting_system"))
+                .apis(RequestHandlerSelectors.basePackage("com.audio_translator"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(metaInfo());
 
     }
     private ApiInfo metaInfo() {
 
-        ApiInfo apiInfo=new ApiInfo("Excel Generation API",
+        ApiInfo apiInfo=new ApiInfo("Audio translation API",
                 "API methods", "0.1",
                 "Terms of Service",
-                new Contact("Antra Inc","http://www.antra.com","dawei.zhuang@antra.com"),
+                new Contact("Audio translation","---","xxu9401@gmail.com"),
                 "MIT", "", Collections.EMPTY_LIST);
 
         return apiInfo;

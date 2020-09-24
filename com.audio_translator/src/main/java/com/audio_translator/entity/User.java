@@ -1,19 +1,18 @@
 package com.audio_translator.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,7 +32,6 @@ public class User {
 	@Column(name = "user_id")
 	private Integer userId;
 	
-	@NotNull
 	@Column(name="user_firstname")
 	private String firstName;
 	
@@ -49,12 +47,11 @@ public class User {
 	@Column(name="lastlogin")
 	private LocalDateTime lastlogin;
 
-	@OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy = "user")
-	private Asset asset;
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id") // "id" is foreign key in the table Asset 
+	private List<Asset> assets;
 	
-	public User(String firstName, String lastName, String email,String loginSource, LocalDateTime lastlogin) {
+	public User(String firstName, String lastName, String email, String loginSource, LocalDateTime lastlogin) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

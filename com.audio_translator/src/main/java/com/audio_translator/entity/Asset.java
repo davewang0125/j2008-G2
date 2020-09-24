@@ -7,9 +7,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,9 +28,9 @@ import lombok.NoArgsConstructor;
 public class Asset {
 	
 	@Id
-	@GeneratedValue
-	@Column(name = "user_id")
-	private Integer userId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer Id;
 	
 	@Column(name="audio")
 	private String audio;
@@ -40,8 +41,8 @@ public class Asset {
 	@Column(name="translation")
 	private String translation;
 	
-	@Column(name="asset_id")
-	private String assetId;
+//	@Column(name="asset_id")
+//	private String assetId;
 	
 	@Column(name="content")
 	private String content;
@@ -49,15 +50,14 @@ public class Asset {
 	@Column(name="timetamp")
 	private LocalDateTime timetamp;
 
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 	
 	public Asset(String audio, String transcript, String tranlation, String assetId, String content, LocalDateTime timetamp) {
 		this.audio = audio;
 		this.transcript = transcript;
 		this.translation = tranlation;
-		this.assetId = assetId;
 		this.content = content;
 		this.timetamp = LocalDateTime.now();
 	}
@@ -67,11 +67,10 @@ public class Asset {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Asset asset = (Asset) o;
-		return Objects.equals(userId, asset.userId) &&
+		return Objects.equals(Id, asset.Id) &&
 			Objects.equals(audio, asset.audio) &&
 			Objects.equals(transcript, asset.transcript) &&
 			Objects.equals(translation, asset.translation) &&
-			Objects.equals(assetId, asset.assetId) &&
 			Objects.equals(content, asset.content) &&
 			Objects.equals(timetamp, asset.timetamp);
 	}
@@ -79,17 +78,16 @@ public class Asset {
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(userId, audio, transcript, translation, assetId, content, timetamp);
+		return Objects.hash(Id, audio, transcript, translation, content, timetamp);
 	}
 
 	@Override
 	public String toString() {
-		return "user{" +
-			"id=" + userId +
+		return "asset{" +
+			"id=" + Id +
 			", audio='" + audio + '\'' +
 			", transcript='" + transcript + '\'' +
 			", translation='" + translation + '\'' +
-			", assetId='" + assetId + '\'' +
 			", content='" + content + '\'' +
 			", timetamp='" + timetamp + '\'' +
 			'}';

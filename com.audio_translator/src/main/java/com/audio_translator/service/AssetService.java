@@ -14,19 +14,19 @@ public class AssetService {
 	@Autowired
 	private AssetRepository repository;
 	
-	public Asset saveUser(Asset asset) {
+	public Asset saveAsset(Asset asset) {
 		return repository.save(asset);
 	}
 	
-	public List<Asset> saveUsers(List<Asset> users) {
+	public List<Asset> saveAssets(List<Asset> users) {
 		return repository.saveAll(users);
 	}
 	
-	public Asset getUserById(int id) {
-		return repository.findById(id).orElse(null);
+	public List<Asset> getAssetsById(int id) {
+		return (List<Asset>) repository.findById(id).orElse(null);
 	}
 	
-	public List<Asset> getUsers() {
+	public List<Asset> getAsset() {
 		return repository.findAll();
 	}
 	
@@ -40,11 +40,10 @@ public class AssetService {
 	}
 	
 	public Asset updateUser(Asset asset) {
-		Asset existingAsset = repository.findById(asset.getUserId()).orElse(null);
+		Asset existingAsset = repository.findById(asset.getId()).orElse(null);
 		existingAsset.setAudio(asset.getAudio());
 		existingAsset.setTranscript(asset.getTranscript());
 		existingAsset.setTranslation(asset.getTranslation());
-		existingAsset.setAssetId(asset.getAssetId());
 		existingAsset.setContent(asset.getContent());
 		existingAsset.setTimetamp(asset.getTimetamp());
 		return repository.save(existingAsset);
