@@ -53,6 +53,11 @@ public class HomeController {
 	@Autowired 
 	AssetRepository assetRepository;
 	
+    @GetMapping("/")
+    public String notRestricted() {
+        return "need login!";
+    }
+    
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(HttpMessageNotReadableException.class)
@@ -64,15 +69,9 @@ public class HomeController {
 	@PostMapping("/addUser") 
 	@ApiOperation("Add an user")
 	public User addUser(@RequestBody User user) {
-    	log.info("UserId {} FirstName {} LastName {} Email {}", user.getUserId().toString(), user.getFirstName(), user.getLastName(), user.getEmail() );
+    	log.info("UserId {} UserName {} FirstName {} LastName {} Email {}", user.getUserId().toString(), user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail() );
 
 		return userService.saveUser(user);
-	}
-	
-	@PostMapping("/addUsers") 
-	@ApiOperation("Add a list of users")
-	public List<User> addUsers(@RequestBody List<User> users) {
-		return userService.saveUsers(users);
 	}
 	
 	@GetMapping("/Users")
@@ -89,19 +88,25 @@ public class HomeController {
 	    return ResponseEntity.ok().body(user);
 	}
 	
-//	@GetMapping("/User/{name}")
-//	@ApiOperation("find user by name")
-//	public User findUserByName(@PathVariable String name) {
-//		return userService.getUserByName(name);
-//	}
+	@GetMapping("/User/{user_name}")
+	@ApiOperation("find user by username")
+	public User findUserByName(@PathVariable String user_name) {
+		List<User> users = userRepository.findAll();
+		for(User user: users) { 
+			if(user.getUserName().equals(user_name)) {
+				return user;
+			}
+		}
+		throw new UserNotFoundException("User not found :: " + user_name);
+	}
 	
 	@PutMapping("/Users/{id}")
-	@ApiOperation("update user")
+	@ApiOperation("update user profile")
 	public ResponseEntity<User> updateUser(@PathVariable(value = "id") Integer userId,
 	        			   @Valid @RequestBody User userDetails)  throws UserNotFoundException {
 		User user = userRepository.findById(userId)
 	            .orElseThrow(() -> new UserNotFoundException("User not found :: " + userId));
-	        //user.setEmail(userDetails.getEmail());
+	        user.setEmail(userDetails.getEmail());
 	    final User updatedUser = userRepository.save(user);
 	    return ResponseEntity.ok(updatedUser);
 	}
@@ -118,45 +123,42 @@ public class HomeController {
         return response;
 	}
 
-    @GetMapping("/")
-    public String notRestricted() {
-        return "need login!";
-    }
-
-//    @GetMapping("/restricted")
-//    public String restricted() {
-//        return "if you see this you are logged in";
-//    }
-	
-//	@RequestMapping(value = "/") // <2>
-//	public String index() {
-//		return "index"; // <3>
-//	}
-
-    @PostMapping("/addAsset") 
+    @PostMapping("/User/{id}/addAsset")  // asset add userId ???
 	@ApiOperation("Add an asset")
-	public Asset addAsset(@RequestBody Asset asset) {
-    	log.info("Id {} Audio {} Tanscript {} Translation {}", asset.getId().toString(), asset.getAudio(), asset.getTranscript(), asset.getTranslation() );
-
+	public Asset addAsset(@RequestBody Asset asset, @PathVariable(value = "id") Integer userId) {
+    	log.info("AssetId {} Audio {} Tanscript {} Translation {}", asset.getAsset_id().toString(), asset.getAudio(), asset.getTranscript(), asset.getTranslation() );
+    	User user = userRepository.findById(userId)
+	            .orElseThrow(() -> new UserNotFoundException("User not found :: " + userId));
+    	user.addAsset(asset);
 		return assetService.saveAsset(asset);
 	}
 	
-	@GetMapping("/assetById/{id}")
-	@ApiOperation("find assets by id")
-	public ResponseEntity<List<Asset>> findAssetsById(@PathVariable(value = "id") Integer id) throws UserNotFoundException {
-	        List<Asset> assets = (List<Asset>) assetRepository.findById(id)
-	            .orElseThrow(() -> new AssetNotFoundException("Assets not found :: " + id));
+	@GetMapping("/User/{id}/Assets")
+	@ApiOperation("list all assets by userid")
+	public ResponseEntity<List<Asset>> findAssetsById(@PathVariable(value = "id") Integer UserId) throws UserNotFoundException { 
+		User user = userRepository.findById(UserId)
+	            .orElseThrow(() -> new UserNotFoundException("User not found :: " + UserId));
+		List<Asset> assets = user.getAssets();
 	    return ResponseEntity.ok().body(assets);
 	}
 	
-	@DeleteMapping("/Assets/{id}")
-	@ApiOperation("delete assets")
-	public Map<String, Boolean> deleteAssets(@PathVariable(value = "id") int id) throws UserNotFoundException {
-	        Asset asset = assetRepository.findById(id)
-	            .orElseThrow(() -> new AssetNotFoundException("User not found :: " + id));
-
-	    assetRepository.delete(asset);
-        Map < String, Boolean > response = new HashMap < > ();
+	@DeleteMapping("/User/{id}/Asset/{asse_id}")
+	@ApiOperation("delete asset")
+	public Map<String, Boolean> deleteAsset(@PathVariable(value = "id") Integer UserId, @PathVariable(value = "asse_id") Integer id) throws UserNotFoundException {
+		User user = userRepository.findById(UserId)
+	            .orElseThrow(() -> new AssetNotFoundException("Assets not found :: " + UserId));    
+		List<Asset> assets = user.getAssets();
+		boolean found = false;
+	    for(Asset a: assets) {
+	    	if(a.getAsset_id() == id) {
+	    		assetRepository.delete(a);
+	    		found = true;
+	    	}
+	    } 
+	    if(found == false) {
+		    throw new AssetNotFoundException("Assets not found :: " + id);
+	    }
+        Map<String, Boolean> response = new HashMap<> ();
         response.put("deleted", Boolean.TRUE);
         return response;
 	}

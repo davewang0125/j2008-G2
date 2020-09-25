@@ -22,10 +22,6 @@ public class AssetService {
 		return repository.saveAll(users);
 	}
 	
-	public List<Asset> getAssetsById(int id) {
-		return (List<Asset>) repository.findById(id).orElse(null);
-	}
-	
 	public List<Asset> getAsset() {
 		return repository.findAll();
 	}
@@ -34,13 +30,13 @@ public class AssetService {
 //		return repository.findByName(name);
 //	}
 	
-	public String deleteUser(int id) {
+	public String deleteAsset(int id) {
 		repository.deleteById(id);
 		return "Asset " + id + " removed";
 	}
 	
 	public Asset updateUser(Asset asset) {
-		Asset existingAsset = repository.findById(asset.getId()).orElse(null);
+		Asset existingAsset = repository.findById(asset.getAsset_id()).orElse(null);
 		existingAsset.setAudio(asset.getAudio());
 		existingAsset.setTranscript(asset.getTranscript());
 		existingAsset.setTranslation(asset.getTranslation());

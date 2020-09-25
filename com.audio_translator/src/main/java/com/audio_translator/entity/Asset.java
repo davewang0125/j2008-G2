@@ -3,6 +3,7 @@ package com.audio_translator.entity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,8 +30,8 @@ public class Asset {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer Id;
+	@Column(name="asset_id")
+	private Integer asset_id;
 	
 	@Column(name="audio")
 	private String audio;
@@ -41,17 +42,14 @@ public class Asset {
 	@Column(name="translation")
 	private String translation;
 	
-//	@Column(name="asset_id")
-//	private String assetId;
-	
 	@Column(name="content")
 	private String content;
 	
 	@Column(name="timetamp")
 	private LocalDateTime timetamp;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+	@ManyToOne(cascade= {CascadeType.ALL}, fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id")
     private User user;
 	
 	public Asset(String audio, String transcript, String tranlation, String assetId, String content, LocalDateTime timetamp) {
@@ -67,7 +65,8 @@ public class Asset {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Asset asset = (Asset) o;
-		return Objects.equals(Id, asset.Id) &&
+		return 
+			Objects.equals(asset_id, asset.asset_id) &&
 			Objects.equals(audio, asset.audio) &&
 			Objects.equals(transcript, asset.transcript) &&
 			Objects.equals(translation, asset.translation) &&
@@ -78,13 +77,13 @@ public class Asset {
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(Id, audio, transcript, translation, content, timetamp);
+		return Objects.hash(asset_id, audio, transcript, translation, content, timetamp);
 	}
 
 	@Override
 	public String toString() {
 		return "asset{" +
-			"id=" + Id +
+			"asset_id=" + asset_id +
 			", audio='" + audio + '\'' +
 			", transcript='" + transcript + '\'' +
 			", translation='" + translation + '\'' +
