@@ -1,16 +1,16 @@
-package com.audio_translator.security.oauth2;
+package com.audio_translator.oauth2;
 
 import java.util.Map;
 
-public class GithubUserInfo extends oauth2UserInfo {
+public class GoogleUserInfo extends oauth2UserInfo {
 
-    public GithubUserInfo(Map<String, Object> attributes) {
+    public GoogleUserInfo(Map<String, Object> attributes) {
         super(attributes);
     }
 
     @Override
     public String getId() {
-        return attributes.get("id").toString();
+        return attributes.get("sub").toString();
     }
 
     @Override
@@ -22,4 +22,10 @@ public class GithubUserInfo extends oauth2UserInfo {
     public String getEmail() {
         return (String) attributes.get("email");
     }
+
+    @Override
+    public String getIconUrl() {
+        return null;
+    }
+
 }

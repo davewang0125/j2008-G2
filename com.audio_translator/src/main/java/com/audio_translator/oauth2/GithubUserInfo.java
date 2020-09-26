@@ -1,10 +1,10 @@
-package com.audio_translator.security.oauth2;
+package com.audio_translator.oauth2;
 
 import java.util.Map;
 
-public class GoogleUserInfo extends oauth2UserInfo {
+public class GithubUserInfo extends oauth2UserInfo {
 
-    public GoogleUserInfo(Map<String, Object> attributes) {
+    public GithubUserInfo(Map<String, Object> attributes) {
         super(attributes);
     }
 
@@ -23,4 +23,8 @@ public class GoogleUserInfo extends oauth2UserInfo {
         return (String) attributes.get("email");
     }
 
+    @Override
+    public String getIconUrl() {
+        return null;
+    }
 }

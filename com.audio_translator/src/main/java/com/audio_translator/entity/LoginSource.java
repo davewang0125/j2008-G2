@@ -1,11 +1,13 @@
 package com.audio_translator.entity;
 
 public enum LoginSource {
-    LINKEDIN("linkedin"), GOOGLE("google"), GITHUB("github"), LOCAL("local");
+    LINKEDIN("linkedin"),
+    GOOGLE("https://accounts.google.com"),
+    GITHUB("github");
 
     private String loginSource;
 
-    public String getProviderType() {
+    public String getLoginSource() {
         return loginSource;
     }
 

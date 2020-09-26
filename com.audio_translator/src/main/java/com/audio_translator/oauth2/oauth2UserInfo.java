@@ -1,4 +1,4 @@
-package com.audio_translator.security.oauth2;
+package com.audio_translator.oauth2;
 
 import java.util.Map;
 
@@ -18,4 +18,6 @@ public abstract class oauth2UserInfo {
     public abstract String getName();
 
     public abstract String getEmail();
+
+    public abstract String getIconUrl();
 }

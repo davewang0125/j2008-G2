@@ -1,10 +1,10 @@
-package com.audio_translator.security.oauth2;
+package com.audio_translator.oauth2;
 
 import java.util.Map;
 
-public class LinkedInUserInfo extends oauth2UserInfo {
+public class FacebookUserInfo extends oauth2UserInfo {
 
-    public LinkedInUserInfo(Map<String, Object> attributes) {
+    public FacebookUserInfo(Map<String, Object> attributes) {
         super(attributes);
     }
 
@@ -21,5 +21,10 @@ public class LinkedInUserInfo extends oauth2UserInfo {
     @Override
     public String getEmail() {
         return (String) attributes.get("email");
+    }
+
+    @Override
+    public String getIconUrl() {
+        return null;
     }
 }
