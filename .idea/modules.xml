@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/com.audio_translator/com.audio_translator.iml" filepath="$PROJECT_DIR$/com.audio_translator/com.audio_translator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/j2008-G2.iml" filepath="$PROJECT_DIR$/.idea/j2008-G2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vadio_translation/vadio_translation.iml" filepath="$PROJECT_DIR$/vadio_translation/vadio_translation.iml" />
+    </modules>
+  </component>
+</project>
