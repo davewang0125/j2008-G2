@@ -7,7 +7,7 @@ public enum LoginSource {
 
     private String loginSource;
 
-    public String getLoginSource() {
+    public String getString() {
         return loginSource;
     }
 
