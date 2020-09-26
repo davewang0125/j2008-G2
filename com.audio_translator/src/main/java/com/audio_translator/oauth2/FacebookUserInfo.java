@@ -2,7 +2,7 @@ package com.audio_translator.oauth2;
 
 import java.util.Map;
 
-public class FacebookUserInfo extends oauth2UserInfo {
+public class FacebookUserInfo extends OAuth2UserInfo {
 
     public FacebookUserInfo(Map<String, Object> attributes) {
         super(attributes);

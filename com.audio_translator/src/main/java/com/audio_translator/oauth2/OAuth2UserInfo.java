@@ -2,10 +2,10 @@ package com.audio_translator.oauth2;
 
 import java.util.Map;
 
-public abstract class oauth2UserInfo {
+public abstract class OAuth2UserInfo {
     protected Map<String, Object> attributes;
 
-    public oauth2UserInfo(Map<String, Object> attributes) {
+    public OAuth2UserInfo(Map<String, Object> attributes) {
         this.attributes = attributes;
     }
 

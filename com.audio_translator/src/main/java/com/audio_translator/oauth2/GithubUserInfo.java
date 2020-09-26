@@ -2,7 +2,7 @@ package com.audio_translator.oauth2;
 
 import java.util.Map;
 
-public class GithubUserInfo extends oauth2UserInfo {
+public class GithubUserInfo extends OAuth2UserInfo {
 
     public GithubUserInfo(Map<String, Object> attributes) {
         super(attributes);
