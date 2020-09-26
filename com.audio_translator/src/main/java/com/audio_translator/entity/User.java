@@ -50,7 +50,7 @@ public class User {
 	private String email;
 	
 	@Column(name="loginsource")
-	private String loginSource;
+	private LoginSource loginSource;
 	
 	@Column(name="lastlogin")
 	private LocalDateTime lastlogin;
@@ -68,7 +68,7 @@ public class User {
 		asset.setUser(this);
 	}
 	
-	public User(String userName, String firstName, String lastName, String email, String loginSource, LocalDateTime lastlogin) {
+	public User(String userName, String firstName, String lastName, String email, LoginSource loginSource, LocalDateTime lastlogin) {
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;

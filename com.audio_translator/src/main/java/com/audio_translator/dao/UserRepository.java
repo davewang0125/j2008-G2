@@ -5,7 +5,13 @@ import org.springframework.stereotype.Repository;
 
 import com.audio_translator.entity.User;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
+
+    Boolean existsUserByUserName(String userName);
+
+    User findByUserName(String userName);
 
 }
