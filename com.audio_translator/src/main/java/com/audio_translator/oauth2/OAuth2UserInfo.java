@@ -1,5 +1,7 @@
 package com.audio_translator.oauth2;
 
+import com.audio_translator.entity.LoginSource;
+
 import java.util.Map;
 
 public abstract class OAuth2UserInfo {
@@ -19,5 +21,5 @@ public abstract class OAuth2UserInfo {
 
     public abstract String getEmail();
 
-    public abstract String getIconUrl();
+    public abstract LoginSource getLoginSource();
 }

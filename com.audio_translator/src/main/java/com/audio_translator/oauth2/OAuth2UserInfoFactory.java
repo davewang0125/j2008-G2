@@ -6,17 +6,16 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 public class OAuth2UserInfoFactory {
-
-    public static OAuth2UserInfo getOAuth2UserInfo(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
-        String registerationId = oAuth2UserRequest.getClientRegistration().getClientId();
-        if (registerationId.equalsIgnoreCase(LoginSource.GOOGLE.getLoginSource())) {
+    //TODO modify  github and facebook login
+    public static OAuth2UserInfo getOAuth2UserInfo(OAuth2User oAuth2User) {
+        if (oAuth2User.getAttribute("sub") != null) {
             return new GoogleUserInfo(oAuth2User.getAttributes());
-        } else if (registerationId.equalsIgnoreCase(LoginSource.GITHUB.getLoginSource())) {
+        } else if (oAuth2User.getAttribute("name") != null) {
             return new GithubUserInfo(oAuth2User.getAttributes());
-        } else if (registerationId.equalsIgnoreCase(LoginSource.FACEBOOK.getLoginSource())) {
+        } else if (oAuth2User.getAttribute("facebook") != null) {
             return new FacebookUserInfo(oAuth2User.getAttributes());
         } else {
-            throw new OAuth2AuthenticationSupportException("Login with " + registerationId + " is not support yet.");
+            throw new OAuth2AuthenticationSupportException("This third part Login is not support yet.");
         }
     }
 }

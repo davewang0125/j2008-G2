@@ -1,16 +1,7 @@
 package com.audio_translator;
 
-import java.time.LocalDateTime;
-import java.util.Calendar;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.audio_translator.dao.AssetRepository;
-import com.audio_translator.dao.UserRepository;
-import com.audio_translator.entity.Asset;
-import com.audio_translator.entity.User;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 

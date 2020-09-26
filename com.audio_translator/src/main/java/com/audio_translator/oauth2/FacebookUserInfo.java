@@ -1,5 +1,7 @@
 package com.audio_translator.oauth2;
 
+import com.audio_translator.entity.LoginSource;
+
 import java.util.Map;
 
 public class FacebookUserInfo extends OAuth2UserInfo {
@@ -24,7 +26,7 @@ public class FacebookUserInfo extends OAuth2UserInfo {
     }
 
     @Override
-    public String getIconUrl() {
-        return null;
+    public LoginSource getLoginSource() {
+        return LoginSource.FACEBOOK;
     }
 }
