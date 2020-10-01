@@ -37,3 +37,9 @@
     color: gray;
     font-size: x-small;
 }
+
+.main-icon {
+    font-size: 2em;
+    margin-top: 20px;
+    margin-right: 5px;
+}
